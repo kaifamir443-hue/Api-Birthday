@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
+<title>Happy Birthday Api</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="stage" id="stage">
+
+  <!-- SCREEN 1 : PHONE LOCKED -->
+  <section class="screen screen--lock is-active" data-screen="lock">
+    <div class="paper-frame">
+      <p class="eyebrow">phone locked</p>
+      <h1 class="script-title">enter golden numbers</h1>
+      <p class="hint" id="lockHint">Hint: The day she officially became everyone's favorite Api. 😂</p>
+
+      <div class="phone-mock">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="lock-top">
+            <div class="dots" id="dots">
+              <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            </div>
+            <div class="status" id="lockStatus" aria-live="polite"></div>
+          </div>
+          <div class="keypad" id="keypad">
+            <button class="key" data-key="1">1</button>
+            <button class="key" data-key="2">2</button>
+            <button class="key" data-key="3">3</button>
+            <button class="key" data-key="4">4</button>
+            <button class="key" data-key="5">5</button>
+            <button class="key" data-key="6">6</button>
+            <button class="key" data-key="7">7</button>
+            <button class="key" data-key="8">8</button>
+            <button class="key" data-key="9">9</button>
+            <button class="key key--ghost" data-key="back" aria-label="Backspace">⌫</button>
+            <button class="key" data-key="0">0</button>
+            <button class="key key--ghost" data-key="clear" aria-label="Clear">✕</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCREEN 2 : DRAMATIC OPENING -->
+  <section class="screen screen--drama" data-screen="drama">
+    <div class="drama-inner">
+      <div class="drama-step" data-step="warning">
+        <p class="warning-icon">⚠️</p>
+        <p class="warning-text">WARNING</p>
+        <p class="warning-sub">A very important person has entered the building…</p>
+      </div>
+      <div class="drama-step" data-step="loading" hidden>
+        <p class="loading-label">Initializing Birthday Protocol…</p>
+        <div class="loading-track"><div class="loading-fill" id="loadingFill"></div></div>
+        <p class="loading-pct" id="loadingPct">0%</p>
+      </div>
+      <div class="drama-step drama-step--reveal" data-step="reveal" hidden>
+        <div class="celebrate-emojis">🎉🎈✨🎂</div>
+        <h1 class="reveal-title">HAPPY BIRTHDAY<br>APIII!</h1>
+        <p class="reveal-sub">09 • 09</p>
+        <p class="reveal-note">Today is officially Api Day.</p>
+        <button class="btn btn--continue" id="toHomeBtn">TAP TO CONTINUE →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCREEN 3 : PHONE HOME SCREEN -->
+  <section class="screen screen--home" data-screen="home">
+    <div class="paper-frame">
+      <div class="phone-mock phone-mock--tall">
+        <div class="phone-notch"></div>
+        <div class="phone-screen phone-screen--home">
+          <div class="home-time">
+            <p class="home-clock">09:09</p>
+            <p class="home-date">Thursday, September 9</p>
+          </div>
+
+          <div class="app-grid">
+            <button class="app-icon" data-app="awards" aria-label="Open Awards"><span>🏆</span><small>Awards</small></button>
+            <button class="app-icon" data-app="call"   aria-label="Open Call"><span>📞</span><small>Call</small></button>
+            <button class="app-icon" data-app="secret" aria-label="Open Secret message"><span>💌</span><small>Secret</small></button>
+            <button class="app-icon" data-app="gift"   aria-label="Open Gift"><span>🎁</span><small>Gift</small></button>
+          </div>
+
+          <div class="notification-card" id="notifCard">
+            <p class="notif-text">🔔 You have 3 new birthday notifications</p>
+            <button class="btn btn--small" id="openNotifBtn">OPEN NOTIFICATIONS</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCREEN 4 : API AWARDS 2026 -->
+  <section class="screen screen--awards" data-screen="awards">
+    <div class="paper-frame">
+      <h1 class="script-title">🏆 Api Awards 2026</h1>
+      <p class="hint">Celebrating an extremely important person.</p>
+
+      <div class="award-card" id="awardCard">
+        <p class="award-emoji" id="awardEmoji">🏆</p>
+        <h2 class="award-title" id="awardTitle">BEST API AWARD</h2>
+        <p class="award-desc" id="awardDesc">Because obviously. There was literally no competition. 😂</p>
+      </div>
+
+      <div class="award-congrats" id="awardCongrats" hidden>
+        <p class="congrats-title">🏆 Congratulations Api!</p>
+        <p class="congrats-sub">You have successfully won absolutely everything.</p>
+      </div>
+
+      <button class="btn btn--continue" id="awardNextBtn">NEXT →</button>
+      <button class="btn btn--back" id="awardBackBtn">← Back to Phone</button>
+    </div>
+  </section>
+
+  <!-- SCREEN 5 : FAKE INCOMING CALL -->
+  <section class="screen screen--call" data-screen="call">
+    <div class="call-inner" id="callInner">
+
+      <div class="call-state" data-state="ringing">
+        <p class="call-label">📱 INCOMING CALL</p>
+        <p class="call-number">UNKNOWN NUMBER</p>
+        <p class="call-status pulse">📞 Calling…</p>
+        <div class="call-buttons">
+          <button class="call-btn call-btn--decline" data-action="decline">❌<span>Decline</span></button>
+          <button class="call-btn call-btn--answer" data-action="answer">✅<span>Answer</span></button>
+        </div>
+      </div>
+
+      <div class="call-state" data-state="nag" hidden>
+        <p class="call-label">Are you sure? 👀</p>
+        <p class="call-number call-number--soft">Someone REALLY wants to talk to you…</p>
+        <div class="call-buttons">
+          <button class="call-btn call-btn--decline" data-action="decline-again">❌<span>Decline Again</span></button>
+          <button class="call-btn call-btn--answer" data-action="answer">✅<span>Answer</span></button>
+        </div>
+      </div>
+
+      <div class="call-state call-state--connected" data-state="connected" hidden>
+        <p class="call-label call-label--connected">📞 CONNECTED</p>
+        <div class="call-transcript" id="callTranscript"></div>
+        <button class="btn btn--continue" id="endCallBtn" hidden>END CALL</button>
+      </div>
+
+    </div>
+    <button class="btn btn--back btn--back-call" id="callBackBtn">← Back to Phone</button>
+  </section>
+
+  <!-- SCREEN 6 : SECRET MESSAGE -->
+  <section class="screen screen--secret" data-screen="secret">
+    <div class="paper-frame">
+      <div class="secret-intro" id="secretIntro">
+        <h1 class="script-title">💌 One Last Message</h1>
+        <p class="hint">Okay… enough of the nonsense. 😂</p>
+        <p class="hint">This one's actually from me. ❤️</p>
+        <button class="btn btn--continue" id="openMessageBtn">OPEN MESSAGE</button>
+      </div>
+
+      <div class="letter" id="letter" hidden>
+        <div class="letter-lines" id="letterLines"></div>
+        <p class="letter-date">09 • 09 ❤️</p>
+        <button class="btn btn--continue" id="toFinalBtn" hidden>CONTINUE →</button>
+      </div>
+      <button class="btn btn--back" id="secretBackBtn">← Back to Phone</button>
+    </div>
+  </section>
+
+  <!-- SCREEN 6b : GIFT -->
+  <section class="screen screen--gift" data-screen="gift">
+    <div class="paper-frame">
+      <h1 class="script-title">🎁 Your Gifts</h1>
+      <p class="hint">Tap each gift to open it.</p>
+
+      <div class="gift-grid" id="giftGrid">
+        <button class="gift-box" id="gift1" aria-label="Open Gift 1" data-gift="1">
+          <span class="gift-lid">🎁</span>
+          <small>Gift #1</small>
+        </button>
+        <button class="gift-box" id="gift2" aria-label="Open Gift 2" data-gift="2">
+          <span class="gift-lid">🎁</span>
+          <small>Gift #2</small>
+        </button>
+        <button class="gift-box" id="gift3" aria-label="Open Gift 3" data-gift="3">
+          <span class="gift-lid">🎁</span>
+          <small>Gift #3</small>
+        </button>
+      </div>
+
+      <div class="gift-reveal" id="giftReveal" hidden>
+        <p class="gift-reveal-text" id="giftRevealText"></p>
+      </div>
+
+      <div class="gift-final" id="giftFinal" hidden>
+        <p class="gift-loading-label">Loading your expensive gift…</p>
+        <div class="loading-track"><div class="loading-fill" id="giftLoadingFill"></div></div>
+        <p class="gift-error" id="giftError" hidden>ERROR 404: Expensive Gift Not Found. 😭😂<br><br>But don't worry…<br>Your birthday treat is still pending. 😌😂</p>
+      </div>
+
+      <button class="btn btn--back" id="giftBackBtn">← Back to Phone</button>
+    </div>
+  </section>
+
+  <!-- SCREEN 7 : FINAL BIRTHDAY SCREEN -->
+  <section class="screen screen--final" data-screen="final">
+    <div class="balloons" id="balloonsWrap" aria-hidden="true"></div>
+    <div class="popper popper--left" id="popperLeft" aria-hidden="true">🎉</div>
+    <div class="popper popper--right" id="popperRight" aria-hidden="true">🎉</div>
+    <div class="final-inner">
+
+      <div class="final-cake-wrap" id="finalCakeWrap">
+        <p class="final-prompt">MAKE A WISH ✨</p>
+        <button class="cake-btn" id="cakeBtn" aria-label="Tap the cake to make a wish">
+          <svg viewBox="0 0 200 200" class="cake-svg" aria-hidden="true">
+            <ellipse cx="100" cy="168" rx="70" ry="14" fill="#e8b4c8" opacity="0.55"/>
+            <rect x="40" y="120" width="120" height="45" rx="10" fill="#fbeef2"/>
+            <rect x="40" y="120" width="120" height="14" rx="7" fill="#f3d4e0"/>
+            <rect x="55" y="95" width="90" height="35" rx="9" fill="#fff7f9"/>
+            <rect x="55" y="95" width="90" height="12" rx="6" fill="#f6dde8"/>
+            <g id="candleGroup">
+              <rect x="94" y="55" width="6" height="30" rx="3" fill="#f2a7c3"/>
+              <rect x="70" y="60" width="6" height="25" rx="3" fill="#f2a7c3"/>
+              <rect x="124" y="60" width="6" height="25" rx="3" fill="#f2a7c3"/>
+              <circle class="flame" data-flame="1" cx="73" cy="56" r="0" fill="#ffd27a"/>
+              <circle class="flame" data-flame="2" cx="97" cy="51" r="0" fill="#ffd27a"/>
+              <circle class="flame" data-flame="3" cx="127" cy="56" r="0" fill="#ffd27a"/>
+            </g>
+          </svg>
+        </button>
+      </div>
+
+      <div class="final-reveal" id="finalReveal" hidden>
+        <div class="celebrate-emojis">🎉🎈✨🎂</div>
+        <h1 class="reveal-title reveal-title--final">HAPPY BIRTHDAY<br>API! ❤️</h1>
+        <p class="ps-text">P.S.<br>This entire app was made for you.<br>The birthday treat, however, is still your responsibility. 😂😭</p>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+
+<canvas id="confettiCanvas"></canvas>
+<audio id="birthdaySong" src="assets/birthday-song.mp3" preload="auto" loop></audio>
+
+<button class="mute-btn" id="muteBtn" aria-label="Mute sound">🔊</button>
+
+<script src="script.js"></script>
+</body>
+</html>
